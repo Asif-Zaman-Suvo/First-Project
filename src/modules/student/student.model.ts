@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import bcrypt from 'bcrypt'
+
 import {
   // StudentMethods,
   StudentModel,
@@ -9,7 +9,6 @@ import {
   TUserName,
 } from './student.interface'
 import validator from 'validator'
-import config from '../../app/config'
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -94,10 +93,11 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: true,
       unique: true,
     },
-    password: {
-      type: String,
-      required: [true, 'password is required'],
-      maxlength: [20, 'password will be with in 20 charecters'],
+    user: {
+      type: Schema.Types.ObjectId,
+      required: [true, 'user id is required'],
+      unique: true,
+      ref: 'User',
     },
     name: {
       type: userNameSchema,
@@ -151,11 +151,6 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: true,
     },
     profileImg: { type: String },
-    isActive: {
-      type: String,
-      enum: ['active', 'blocked'],
-      default: 'active',
-    },
     isDeleted: {
       type: Boolean,
       default: false,
@@ -171,23 +166,6 @@ const studentSchema = new Schema<TStudent, StudentModel>(
 
 studentSchema.virtual('FullName').get(function () {
   return `${this.name.firstName} ${this.name.middleName} ${this.name.lastName}`
-})
-
-//pre save middleware
-
-studentSchema.pre('save', async function (next) {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const user = this
-  //hashing password and save to db
-  user.password = await bcrypt.hash(user.password, Number(config.salt_rounts))
-  next()
-})
-
-//post save middleware
-
-studentSchema.post('save', function (doc, next) {
-  doc.password = ''
-  next()
 })
 
 //Query middleware
