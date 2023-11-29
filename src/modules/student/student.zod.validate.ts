@@ -52,35 +52,38 @@ const localGuardianZodValidator = z.object({
 })
 
 const studentZodValidatorData = z.object({
-  id: z.string(),
-  password: z.string().max(20),
-  name: userNameZodValidator,
-  gender: z.enum(['Male', 'Female', 'Others']),
-  email: z.string().email({ message: 'Invalid email address' }),
-  dateOfBirth: z.string().optional(),
-  contactNo: z.string().min(1).max(11),
-  emergencyContactNo: z.string().min(1),
-  bloodGroup: z.enum([
-    'A',
-    'B',
-    'AB',
-    'O',
-    'A+',
-    'A-',
-    'B+',
-    'B-',
-    'AB+',
-    'AB-',
-    'O+',
-    'O-',
-  ]),
-  presentAddress: z.string().min(1),
-  permanentAddress: z.string().min(1),
-  guardian: guardianZodValidator,
-  localGuardian: localGuardianZodValidator,
-  profileImg: z.string().optional(),
-  isActive: z.enum(['active', 'blocked']).default('active'),
-  isDeleted: z.boolean(),
+  body: z.object({
+    password: z.string().max(20),
+    student: z.object({
+      name: userNameZodValidator,
+      gender: z.enum(['Male', 'Female', 'Others']),
+      email: z.string().email({ message: 'Invalid email address' }),
+      dateOfBirth: z.string().optional(),
+      contactNo: z.string().min(1).max(11),
+      emergencyContactNo: z.string().min(1),
+      bloodGroup: z.enum([
+        'A',
+        'B',
+        'AB',
+        'O',
+        'A+',
+        'A-',
+        'B+',
+        'B-',
+        'AB+',
+        'AB-',
+        'O+',
+        'O-',
+      ]),
+      presentAddress: z.string().min(1),
+      permanentAddress: z.string().min(1),
+      guardian: guardianZodValidator,
+      localGuardian: localGuardianZodValidator,
+      profileImg: z.string().optional(),
+    }),
+  }),
 })
 
-export default studentZodValidatorData
+export const studentValidations = {
+  studentZodValidatorData,
+}
