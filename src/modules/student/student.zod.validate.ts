@@ -58,7 +58,7 @@ const studentZodValidatorData = z.object({
       name: userNameZodValidator,
       gender: z.enum(['Male', 'Female', 'Others']),
       email: z.string().email({ message: 'Invalid email address' }),
-      dateOfBirth: z.string().optional(),
+      dateOfBirth: z.date().optional(),
       contactNo: z.string().min(1).max(11),
       emergencyContactNo: z.string().min(1),
       bloodGroup: z.enum([

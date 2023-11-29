@@ -31,7 +31,7 @@ export type TStudent = {
   gender: 'Male' | 'Female' | 'Others'
   email: string
   avatar?: string
-  dateOfBirth?: string
+  dateOfBirth?: Date
   contactNo: string
   emergencyContactNo?: string
   bloodGroup?:
@@ -53,6 +53,7 @@ export type TStudent = {
   localGuardian: TLocalGuardian
   profileImg?: string
   isDeleted: boolean
+  admissionSemester: Types.ObjectId
 }
 
 //for creating static

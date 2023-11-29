@@ -120,7 +120,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
         message: '{VALUE} is not a valid email',
       },
     },
-    dateOfBirth: { type: String, required: true },
+    dateOfBirth: { type: Date },
     contactNo: { type: String, required: true },
     emergencyContactNo: { type: String, required: true },
     bloodGroup: {
@@ -154,6 +154,12 @@ const studentSchema = new Schema<TStudent, StudentModel>(
     isDeleted: {
       type: Boolean,
       default: false,
+    },
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      required: [true, 'admission semester id is required'],
+      unique: true,
+      ref: 'AdmissionSemester',
     },
   },
   {
