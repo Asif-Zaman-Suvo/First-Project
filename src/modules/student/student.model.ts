@@ -9,6 +9,8 @@ import {
   TUserName,
 } from './student.interface'
 import validator from 'validator'
+import AppError from '../../app/errors/appError'
+import { NextFunction } from 'express'
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
