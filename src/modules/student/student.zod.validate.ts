@@ -81,6 +81,7 @@ const studentZodValidatorData = z.object({
       localGuardian: localGuardianZodValidator,
       profileImg: z.string().optional(),
       admissionSemester: z.string(),
+      academicDepartment: z.string(),
     }),
   }),
 })
