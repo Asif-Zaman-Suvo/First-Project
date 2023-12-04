@@ -8,4 +8,5 @@ export default {
   database_url: process.env.DATABASE_URL,
   salt_rounts: process.env.SALT_ROUNDS,
   default_password: process.env.DEFAULT_PASSWORD,
+  NODE_ENV: process.env.NODE_ENV,
 }
