@@ -19,15 +19,15 @@ const academicDepartmentSchema = new Schema<TAcademicDepartment>(
   },
 )
 //check the department is exist or not in the database
-academicDepartmentSchema.pre('save', async function (next) {
-  const isDepartmentExist = await AcademicDepartment.findOne({
-    name: this.name,
-  })
-  if (isDepartmentExist) {
-    throw new AppError(404, 'Department is already exist')
-  }
-  next()
-})
+// academicDepartmentSchema.pre('save', async function (next) {
+//   const isDepartmentExist = await AcademicDepartment.findOne({
+//     name: this.name,
+//   })
+//   if (isDepartmentExist) {
+//     throw new AppError(404, 'Department is already exist')
+//   }
+//   next()
+// })
 
 //while updating the department we cant update with the deleted department
 
