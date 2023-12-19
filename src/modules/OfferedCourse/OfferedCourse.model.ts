@@ -1,6 +1,6 @@
-import mongoose, { Schema } from 'mongoose';
-import { Days } from './OfferedCourse.constant';
-import { TOfferedCourse } from './OfferedCourse.interface';
+import mongoose, { Schema } from 'mongoose'
+import { Days } from './OfferedCourse.constant'
+import { TOfferedCourse } from './OfferedCourse.interface'
 
 const offeredCourseSchema = new mongoose.Schema<TOfferedCourse>(
   {
@@ -60,9 +60,9 @@ const offeredCourseSchema = new mongoose.Schema<TOfferedCourse>(
   {
     timestamps: true,
   },
-);
+)
 
 export const OfferedCourse = mongoose.model<TOfferedCourse>(
   'OfferedCourse',
   offeredCourseSchema,
-);
+)
