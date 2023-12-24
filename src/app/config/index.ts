@@ -9,4 +9,5 @@ export default {
   salt_rounts: process.env.SALT_ROUNDS,
   default_password: process.env.DEFAULT_PASSWORD,
   NODE_ENV: process.env.NODE_ENV,
+  JWT_ACCESS_TOKEN: process.env.JWT_ACCESS_TOKEN,
 }
