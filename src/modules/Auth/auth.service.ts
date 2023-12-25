@@ -9,6 +9,7 @@ import { TLoginUser } from './auth.interface'
 // import { createToken, verifyToken } from './auth.utils'
 import AppError from '../../app/errors/appError'
 import config from '../../app/config'
+import { verifyToken } from './auth.utils'
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -49,9 +50,17 @@ const loginUser = async (payload: TLoginUser) => {
     expiresIn: '10d',
   })
 
+  const refreshToken = jwt.sign(
+    jwtPayload,
+    config.JWT_REFRESH_TOKEN as string,
+    {
+      expiresIn: '365d',
+    },
+  )
+
   return {
     accessToken,
-    // refreshToken,
+    refreshToken,
     needsPasswordChange: user?.needPasswordChange,
   }
 }
@@ -110,12 +119,12 @@ const changePassword = async (
 
 const refreshToken = async (token: string) => {
   // checking if the given token is valid
-  const decoded = verifyToken(token, config.jwt_refresh_secret as string)
+  const decoded = verifyToken(token, config.JWT_REFRESH_TOKEN as string)
 
   const { userId, iat } = decoded
 
   // checking if the user is exist
-  const user = await User.isUserExistsByCustomId(userId)
+  const user = await User.isUserExistByCustomId(userId)
 
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !')

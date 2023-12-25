@@ -9,6 +9,7 @@ export interface TUser {
   role: 'Admin' | 'Student' | 'Faculty'
   status: 'In Progress' | 'Blocked'
   isDeleted: boolean
+  passwordChangedAt?: Date
 }
 
 export interface UserModel extends Model<TUser> {

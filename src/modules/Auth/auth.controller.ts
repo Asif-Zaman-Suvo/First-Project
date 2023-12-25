@@ -7,12 +7,12 @@ import sendResponse from '../../app/utils/sendResponse'
 
 const loginUser = catchAsync(async (req, res) => {
   const result = await AuthServices.loginUser(req.body)
-  const { accessToken, needsPasswordChange } = result
+  const { refreshToken, accessToken, needsPasswordChange } = result
 
-  // res.cookie('refreshToken', refreshToken, {
-  //   secure: config.NODE_ENV === 'production',
-  //   httpOnly: true,
-  // })
+  res.cookie('refreshToken', refreshToken, {
+    secure: config.NODE_ENV === 'production',
+    httpOnly: true,
+  })
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -21,6 +21,7 @@ const loginUser = catchAsync(async (req, res) => {
     data: {
       accessToken,
       needsPasswordChange,
+      refreshToken,
     },
   })
 })

@@ -1,11 +1,11 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 const loginValidationSchema = z.object({
   body: z.object({
     id: z.string({ required_error: 'Id is required.' }),
     password: z.string({ required_error: 'Password is required' }),
   }),
-});
+})
 
 const changePasswordValidationSchema = z.object({
   body: z.object({
@@ -14,7 +14,7 @@ const changePasswordValidationSchema = z.object({
     }),
     newPassword: z.string({ required_error: 'Password is required' }),
   }),
-});
+})
 
 const refreshTokenValidationSchema = z.object({
   cookies: z.object({
@@ -22,7 +22,7 @@ const refreshTokenValidationSchema = z.object({
       required_error: 'Refresh token is required!',
     }),
   }),
-});
+})
 
 const forgetPasswordValidationSchema = z.object({
   body: z.object({
@@ -30,7 +30,7 @@ const forgetPasswordValidationSchema = z.object({
       required_error: 'User id is required!',
     }),
   }),
-});
+})
 
 const resetPasswordValidationSchema = z.object({
   body: z.object({
@@ -41,7 +41,7 @@ const resetPasswordValidationSchema = z.object({
       required_error: 'User password is required!',
     }),
   }),
-});
+})
 
 export const AuthValidation = {
   loginValidationSchema,
@@ -49,4 +49,4 @@ export const AuthValidation = {
   refreshTokenValidationSchema,
   forgetPasswordValidationSchema,
   resetPasswordValidationSchema,
-};
+}
